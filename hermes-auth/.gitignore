@@ -1,0 +1,40 @@
+# 忽略 Go 編譯後的二進制文件
+*.exe
+*.dll
+*.so
+*.dylib
+*.out
+*.o
+*.a
+
+# 忽略 Go modules 的下載目錄
+/go/pkg/
+/go/bin/
+
+# 忽略 IDE 或編輯器生成的文件
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 忽略執行 `go test` 時生成的臨時文件
+*.test
+
+# 忽略依賴文件
+vendor/
+
+# 忽略編譯緩存文件
+*.prof
+*.cover
+
+# 忽略執行時生成的日誌文件或數據
+*.log
+*.tmp
+*.pid
+*.db
+*.sqlite3
+
+
+# 忽略 Go 工作空間的緩存（如果你使用 Go 1.17+ 的工作空間模式）
+go.work
+go.work.sum
