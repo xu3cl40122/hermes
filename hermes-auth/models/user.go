@@ -1,11 +1,15 @@
 package models
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"time"
+)
 
 // User 定義用戶模型
 type User struct {
-	ID       primitive.ObjectID `bson:"_id,omitempty"` // MongoDB 的 ObjectID
-	Email    string             `bson:"email"`         // 用戶郵箱
-	Password string             `bson:"password"`      // 密碼（需要加密存儲）
-	Nickname string             `bson:"nickname"`      // 昵称
+	ID        string    `bson:"_id,omitempty" json:"id"`
+	Email     string    `bson:"email" json:"email"`
+	Password  string    `bson:"password" json:"password"`
+	Nickname  string    `bson:"nickname" json:"nickname"`
+	CreatedAt time.Time `bson:"created_at" json:"created_at"`
+	UpdatedAt time.Time `bson:"updated_at" json:"updated_at"`
 }
