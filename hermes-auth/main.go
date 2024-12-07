@@ -15,7 +15,8 @@ func main() {
 
 	r := gin.Default()
 
-	r.POST("/user", userController.CreateUser)
+	r.POST("/register", userController.CreateUser)
+	r.POST("/login", userController.Login)
 
 	r.Run(":8080")
 }

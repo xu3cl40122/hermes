@@ -1,14 +1,17 @@
 package infra
 
 import (
-    "context"
-    "errors"
-    "github.com/xu3cl40122/hermes/hermes-auth/models"
-    "go.mongodb.org/mongo-driver/mongo"
+	"context"
+	"errors"
+
+	"github.com/xu3cl40122/hermes/hermes-auth/models"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type UserRepository interface {
 	Create(ctx context.Context, user *models.User) error
+	Get(ctx context.Context, email string) (*models.User, error)
 }
 
 type MongoUserRepository struct {
@@ -31,4 +34,13 @@ func (r *MongoUserRepository) Create(ctx context.Context, user *models.User) err
         return err
     }
     return nil
+}
+
+func (r *MongoUserRepository) Get(ctx context.Context, email string) (*models.User, error) {
+    var user models.User
+    err := r.collection.FindOne(ctx, bson.M{"email": email}).Decode(&user)
+	if err != nil {
+        return nil, err
+    }
+    return &user, nil
 }
