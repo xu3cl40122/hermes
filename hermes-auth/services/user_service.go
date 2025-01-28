@@ -13,6 +13,7 @@ import (
 type UserService interface {
 	CreateUser(ctx context.Context, input * models.CreateUserInput) (*models.User, error)
 	Login(ctx context.Context, input * models.LoginInput) (string, error)
+	GetById(ctx context.Context, userId string) (*models.User, error)
 }
 type UserServiceImpl struct {
 	repo infra.UserRepository
@@ -60,4 +61,12 @@ func (service *UserServiceImpl) Login(ctx context.Context, input *models.LoginIn
 	}
 
 	return token, nil
+}
+
+func (service *UserServiceImpl) GetById(ctx context.Context, userId string) (*models.User, error) {
+	user, err := service.repo.GetById(ctx, userId)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
 }
